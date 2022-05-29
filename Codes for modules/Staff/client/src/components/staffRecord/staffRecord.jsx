@@ -1,32 +1,17 @@
 import React from "react";
-import {
-  Button,
-  Grid,
-  List,
-  ListItem,
-  ListItemButton,
-  Typography,
-} from "@mui/material";
+import { Button, Grid, List, ListItem, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./staffRecord.css";
-import axios from "axios";
 
 const StaffRecord = (props) => {
   const {
     _id,
     id,
-    status,
-    dormant,
     firstname,
     middlename,
     surname,
-    address,
-    telephone,
-    email,
-    role,
-    subject,
   } = props.staffrecord;
 
   return (
@@ -37,7 +22,6 @@ const StaffRecord = (props) => {
             <li>
               <List>
                 <ListItem>
-                  {/* <ListItemButton>                              */}
                   <div className="listitem">
                     <p>
                       <Button
@@ -98,7 +82,6 @@ const StaffRecord = (props) => {
                       </Grid>
                     </div>
                   </div>
-                  {/* </ListItemButton> */}
                 </ListItem>
               </List>
             </li>

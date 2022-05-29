@@ -10,7 +10,7 @@ import {
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 const UpdateStaff = () => {
   const id = useParams().id;
@@ -27,7 +27,10 @@ const UpdateStaff = () => {
       await axios
         .get(`http://localhost:5000/records/staff/${id}`)
         .then((res) => res.data)
-        .then((data) => setRecord(data.viewRecord));
+        .then((data) => {
+          setRecord(data.viewRecord);
+          setArray(data.viewRecord);
+        });
     };
     getRecords();
   }, [id]);
@@ -318,24 +321,13 @@ const UpdateStaff = () => {
                 Role(s)
               </FormLabel>
 
-              {record.role.map((roles, i) => (
-                <TextField
-                  key={i}
-                  required
-                  value={roles}
-                  onChange={handleArray}
-                  variant="outlined"
-                  name="role"
-                ></TextField>
-              ))}
-
-              {/* <TextField
+              <TextField
                 required
-                value={record.role}
+                value={array.role}
                 onChange={handleArray}
                 variant="outlined"
                 name="role"
-              ></TextField> */}
+              ></TextField>
 
               <FormLabel
                 sx={{
@@ -347,24 +339,13 @@ const UpdateStaff = () => {
                 Subject(s)
               </FormLabel>
 
-              {record.subject.map((subjects, i) => (
-                <TextField
-                  key={i}
-                  required
-                  value={subjects}
-                  onChange={handleArray}
-                  variant="outlined"
-                  name="subject"
-                ></TextField>
-              ))}
-
-              {/* <TextField
+              <TextField
                 required
-                value={record.subject}
+                value={array.subject}
                 onChange={handleArray}
                 variant="outlined"
                 name="subject"
-              ></TextField> */}
+              ></TextField>
 
               <Button
                 variant="contained"
@@ -373,6 +354,16 @@ const UpdateStaff = () => {
               >
                 Update Record
               </Button>
+
+              <Link to="/staff" style={{ textDecoration: "none" }}>
+                <Button
+                  variant="contained"
+                  type="submit"
+                  sx={{ marginTop: "20px", width: "100%" }}
+                >
+                  Cancel
+                </Button>
+              </Link>
             </Box>
           </form>
         )}

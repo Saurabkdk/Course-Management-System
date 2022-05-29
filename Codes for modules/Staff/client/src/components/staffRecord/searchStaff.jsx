@@ -1,6 +1,6 @@
 import { Box, Button, TextField, Typography, Grid, List, ListItem } from '@mui/material';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
@@ -46,7 +46,7 @@ const SearchStaff = () => {
             margin : "10px 10px",
             justifyContent : 'left',
         }}>
-            <TextField onChange={searchInput} variant='outlined' name="id" sx={{
+            <TextField onChange={searchInput} variant='outlined' name="id" label = 'Search Id' sx={{
                 width : '200px',
                 height : '10px',
                 margin : '10px 10px',
@@ -61,7 +61,6 @@ const SearchStaff = () => {
             <li>
               <List>
                 <ListItem>
-                  {/* <ListItemButton>                              */}
                   <div className="listitem">
                     <p>
                       <Button
@@ -122,7 +121,6 @@ const SearchStaff = () => {
                       </Grid>
                     </div>
                   </div>
-                  {/* </ListItemButton> */}
                 </ListItem>
               </List>
             </li>

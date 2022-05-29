@@ -10,7 +10,7 @@ import {
 import { Box } from "@mui/system";
 import axios from "axios";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const CreateStaff = () => {
   const redirect = useNavigate();
@@ -22,8 +22,6 @@ const CreateStaff = () => {
     address: "",
     telephone: "",
     email: "",
-    // role: [""],
-    // subject: [""],
   });
 
   function handleChange(e) {
@@ -62,12 +60,12 @@ const CreateStaff = () => {
 
   const sendRecord = async () => {
     // const Check = (length) => {
-      // let value = [];
-      // for (let i = 0; i < (array.role).length; i++) {
-      //   value.push(array.role[i]);
-      // }
-      // console.log(value);
-      // return value;
+    // let value = [];
+    // for (let i = 0; i < (array.role).length; i++) {
+    //   value.push(array.role[i]);
+    // }
+    // console.log(value);
+    // return value;
     //   let len = length - 1;
     //   if (len > 0) {
     //     return String(array.role[len]) + ", " + String(Check(length - 1));
@@ -101,7 +99,6 @@ const CreateStaff = () => {
 
   const recordSubmit = (event) => {
     event.preventDefault();
-    // console.log(record, status, dormant);
     sendRecord().then(() => redirect("/staff"));
   };
 
@@ -361,6 +358,16 @@ const CreateStaff = () => {
             >
               Add Record
             </Button>
+
+            <Link to="/staff" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                type="submit"
+                sx={{ marginTop: "20px", width: "100%" }}
+              >
+                Cancel
+              </Button>
+            </Link>
           </Box>
         </form>
       </div>

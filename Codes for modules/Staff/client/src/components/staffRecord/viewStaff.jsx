@@ -137,22 +137,13 @@ const ViewStaff = () => {
                     </TableRow>
                   ))}
 
-                  {/* <TableRow>
-                    <TableCell>Role(s)</TableCell>
-                    <TableCell>{record.role[0]}, {record.role[1]}, {record.role[2]}</TableCell>
-                  </TableRow> */}
-
                   {record.subject.map((subjects, i) => (
-                    <TableRow>
-                      <TableCell key={i}>Subject(s)</TableCell>
+                    <TableRow key={i}>
+                      <TableCell>Subject(s)</TableCell>
                       <TableCell>{subjects}</TableCell>
                     </TableRow>
                   ))}
 
-                  {/* <TableRow>
-                    <TableCell>Subject(s)</TableCell>
-                    <TableCell>{record.subject}</TableCell>
-                  </TableRow> */}
                 </TableBody>
               </Table>
             </TableContainer>
