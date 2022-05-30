@@ -40,10 +40,10 @@ const CreateModule = () => {
         id: Number(record.id),
         module_name: String(record.module_name),
         staff: [
-          String(array.staff[0]),
-          String(array.staff[1]),
-          String(array.staff[2]),
-          String(array.staff[3]),
+          array.staff[0],
+          array.staff[1],
+          array.staff[2],
+          array.staff[3],
         ],
         link: String(record.link),
       })

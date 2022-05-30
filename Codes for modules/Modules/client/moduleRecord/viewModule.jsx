@@ -11,7 +11,7 @@ import {
   TableBody,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 
 const ViewModule = () => {
@@ -27,17 +27,19 @@ const ViewModule = () => {
         .get(`http://localhost:5000/records/module/${id}`)
         .then((res) => res.data)
         .then((data) => {
-            setRecord(data.viewRecord);
+          setRecord(data.viewRecord);
         });
     };
     getRecords();
   }, [id]);
 
-  const deleteRecord = async() => {
-    await axios.delete(`http://localhost:5000/records/module/${id}`)
-    .then((res) => res.data)
-    .then(() => redirect('/module'));
-  }
+  const deleteRecord = async () => {
+    await axios
+      .delete(`http://localhost:5000/records/module/${id}`)
+      .then((res) => res.data)
+      .then((res) => console.log(res.data))
+      .then(() => redirect("/module"));
+  };
 
   return (
     <>
@@ -98,7 +100,17 @@ const ViewModule = () => {
                   {record.staff.map((staff, i) => (
                     <TableRow key={i}>
                       <TableCell>Staff</TableCell>
-                      <TableCell>{staff}</TableCell>
+                      <TableCell>
+                        <Link
+                          to={`/staff/view/${staff}`}
+                          style={{
+                            textDecoration: "none",
+                            color: "blue",
+                          }}
+                        >
+                          {staff}
+                        </Link>
+                      </TableCell>
                     </TableRow>
                   ))}
 
