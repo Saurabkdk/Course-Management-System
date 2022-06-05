@@ -1,0 +1,40 @@
+.containList{
+    padding: 40px 20px;
+}
+.buttons{
+    padding: 0px 0 0 60%;
+}
+.list{
+    margin: 0px 30px 0px 0px;
+}
+.listitem{
+    height: 60px;
+    width: 100%;
+    background-color: #97A956;
+    border-radius: 20px;
+}
+main ol {
+    list-style: none;
+}
+.listitem p{
+    padding: 6px;
+    margin: 0;
+    margin-left: 30px;
+    font-size: 18px;
+    float: left;
+}
+.changeButton{
+    padding-top: 14px;
+    float: right;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20vw 80vw;
+}
+.search{
+    display: flex;
+}
+
+
