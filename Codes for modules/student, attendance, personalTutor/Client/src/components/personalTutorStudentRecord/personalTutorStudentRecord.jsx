@@ -5,11 +5,18 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 import "./staffRecord.css";
 
-const PersonalTutorRecord = (props) => {
+const PersonalTutorStudentRecord = (props) => {
   const {
     _id,
-    name,
-  } = props.personaltutorrecord;
+    personalTutorId,
+    studentName,
+    studentLevel, 
+    studentBatch,
+    course,
+    
+  } = props.ps;
+  console.log("rohan");
+  console.log(props);
 
   return (
     <>
@@ -24,20 +31,17 @@ const PersonalTutorRecord = (props) => {
                       <Button
                         color="inherit"
                         LinkComponent={Link}
-                        to={`/personalTutor/view/${_id}`}
+                        to={`/personalTutorStudent/view/${_id}`}
                       >
                         <Typography>
-                          {name}
+                          {studentName} {studentLevel}  
                         </Typography>
                       </Button>
                     </p>
                     <div className="changeButton">
                       <Grid container spacing={1}>
                         <Grid item xs={3}>
-                        <Link
-                            to={`/personalTutorStudent/${_id}`}
-                            style={{ textDecoration: "none", color: "inherit" }}
-                          >
+                      
                           <Button
                             variant="contained"
                             color="inherit"
@@ -46,11 +50,11 @@ const PersonalTutorRecord = (props) => {
                             {" "}
                             Assign{" "}
                           </Button>
-                          </Link>
+                        
                         </Grid>
                         <Grid item xs={3}>
                           <Link
-                            to={`/personalTutor/edit/${_id}`}
+                            to={`/personalTutorStudent/edit/${_id}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                           >
                             <Button
@@ -74,7 +78,7 @@ const PersonalTutorRecord = (props) => {
                           </Button>
                         </Grid>
                         <Grid item xs={3}>
-                          <Link to={`/personalTutor/view/${_id}`}>
+                          <Link to={`/personalTutorStudent/view/${_id}`}>
                             <Button aria-label="delete" sx={{ color: "black" }}>
                               {" "}
                               <DeleteIcon />{" "}
@@ -94,4 +98,4 @@ const PersonalTutorRecord = (props) => {
   );
 };
 
-export default PersonalTutorRecord;
+export default PersonalTutorStudentRecord;

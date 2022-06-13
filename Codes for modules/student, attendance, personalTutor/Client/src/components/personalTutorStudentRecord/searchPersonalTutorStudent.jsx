@@ -1,19 +1,61 @@
-import React from "react";
-import { Button, Grid, List, ListItem, Typography } from "@mui/material";
+import { Box, Button, TextField, Typography, Grid, List, ListItem } from '@mui/material';
+import axios from 'axios';
+import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-import "./staffRecord.css";
 
-const PersonalTutorRecord = (props) => {
-  const {
-    _id,
-    name,
-  } = props.personaltutorrecord;
+const SearchPersonalTutorStudent = () => {
+
+    const [input, setInput] = useState({
+        id : "",
+    })
+    const [record, setRecord] = useState()
+
+    const searchInput = (e) => {
+        setInput((previousInput) => {
+            return{
+                ...previousInput,
+                [e.target.name] : e.target.value
+            }
+        })
+    }
+        const id = parseInt(input.id);
+    
+        const ViewSearch = async () => { 
+            await axios.get(`http://localhost:5000/records/staff/search/${id}`)
+            .then((res) => res.data)
+            .then((data) => setRecord(data.searchRecord)) 
+        }
 
   return (
     <>
-      <div className="record">
+    <div>
+    <Typography
+          sx={{
+            paddingTop: "20px",
+            paddingLeft: "50px",
+            fontSize: "40px",
+            textShadow: "1px 2px grey",
+          }}
+        >
+          Staff
+        </Typography>
+        <Box sx={{
+            display : "flex",
+            margin : "10px 10px",
+            justifyContent : 'left',
+        }}>
+            <TextField onChange={searchInput} variant='outlined' name="id" label = 'Search Id' sx={{
+                width : '200px',
+                height : '10px',
+                margin : '10px 10px',
+            }}></TextField>
+            <Button onClick={ViewSearch} variant='contained' color='secondary' sx={{
+                margin : '15px 10px',
+            }}>Search</Button>
+        </Box>
+        {record && (
         <main className="list">
           <ol>
             <li>
@@ -24,20 +66,16 @@ const PersonalTutorRecord = (props) => {
                       <Button
                         color="inherit"
                         LinkComponent={Link}
-                        to={`/personalTutor/view/${_id}`}
+                        to={`/staff/view/${record._id}`}
                       >
                         <Typography>
-                          {name}
+                          {record.id}. {record.firstname} {record.middlename} {record.surname}
                         </Typography>
                       </Button>
                     </p>
                     <div className="changeButton">
                       <Grid container spacing={1}>
                         <Grid item xs={3}>
-                        <Link
-                            to={`/personalTutorStudent/${_id}`}
-                            style={{ textDecoration: "none", color: "inherit" }}
-                          >
                           <Button
                             variant="contained"
                             color="inherit"
@@ -46,11 +84,10 @@ const PersonalTutorRecord = (props) => {
                             {" "}
                             Assign{" "}
                           </Button>
-                          </Link>
                         </Grid>
                         <Grid item xs={3}>
                           <Link
-                            to={`/personalTutor/edit/${_id}`}
+                            to={`/staff/edit/${record._id}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                           >
                             <Button
@@ -74,7 +111,7 @@ const PersonalTutorRecord = (props) => {
                           </Button>
                         </Grid>
                         <Grid item xs={3}>
-                          <Link to={`/personalTutor/view/${_id}`}>
+                          <Link to={`/staff/view/${record._id}`}>
                             <Button aria-label="delete" sx={{ color: "black" }}>
                               {" "}
                               <DeleteIcon />{" "}
@@ -89,9 +126,10 @@ const PersonalTutorRecord = (props) => {
             </li>
           </ol>
         </main>
-      </div>
+        )}
+        </div>
     </>
-  );
-};
+  )
+}
 
-export default PersonalTutorRecord;
+export default SearchPersonalTutorStudent;
