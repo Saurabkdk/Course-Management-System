@@ -1,23 +1,25 @@
-import { PersonalTutorRecord} from '../model/personalTutorModel.js';
+import { PersonalTutorStudentRecord} from '../model/personalTutorStudentModel.js';
 
-export const getPersonalTutor = async (req, res) => {
-    // const records = req.body;
+export const getPersonalTutorStudents = async (req, res) => {
+    
+    const record = req.body;
     try {
-        // const personalTutorRecord = await PersonalTutorRecord.findById(req.params.id);
-        const personalTutorRecord = await PersonalTutorRecord.find();
+        const personalTutorStudentRecord = await PersonalTutorStudentRecord.find({personalTutorId: req.params.id});
         
-        res.status(200).json({personalTutorRecord});
+        res.status(200).json({personalTutorStudentRecord});
+        
     } catch (error) {
+        // console.log("rohan");
         res.status(404).json({
-            message : "Data not found"
+            message : "Data not found in mongodb " + record
         })
     }
 
 }
 
-export const createPersonalTutor = async (req, res) => {
+export const createPersonalTutorStudent = async (req, res) => {
     const records = req.body
-    const newRecord = new PersonalTutorRecord(records);
+    const newRecord = new PersonalTutorStudentRecord(records);
     try {
         await newRecord.save();
 
@@ -29,11 +31,11 @@ export const createPersonalTutor = async (req, res) => {
     }
 }
 
-export const updatePersonalTutor = async (req, res) => {
+export const updatePersonalTutorStudent = async (req, res) => {
     const records = req.body;
 
     try {
-        let updateRecord = await PersonalTutorRecord.findByIdAndUpdate(req.params.id, records);
+        let updateRecord = await PersonalTutorStudentRecord.findByIdAndUpdate(req.params.id, records);
 
         updateRecord = await updateRecord.save();
 
@@ -45,9 +47,9 @@ export const updatePersonalTutor = async (req, res) => {
     }
 }
 
-export const deletePersonalTutor = async (req, res) => {
+export const deletePersonalTutorStudent = async (req, res) => {
     try {
-        await PersonalTutorRecord.findByIdAndRemove(req.params.id);
+        await PersonalTutorStudentRecord.findByIdAndRemove(req.params.id);
 
         res.status(200).json({
             message : "Record deleted"
@@ -59,9 +61,9 @@ export const deletePersonalTutor = async (req, res) => {
     }
 }
 
-export const searchPersonalTutor = async (req, res) => {
+export const searchPersonalTutorStudent = async (req, res) => {
     try {
-        const searchRecord = await PersonalTutorRecord.findOne({id : req.params.id});
+        const searchRecord = await PersonalTutorStudentRecord.findOne({id : req.params.id});
 
         res.status(200).json({searchRecord});
     } catch (error) {
@@ -71,9 +73,9 @@ export const searchPersonalTutor = async (req, res) => {
     }
 }
 
-export const getOnePersonalTutor = async (req, res) => {
+export const getOnePersonalTutorStudent = async (req, res) => {
     try {
-        const viewRecord = await PersonalTutorRecord.findById(req.params.id);
+        const viewRecord = await PersonalTutorStudentRecord.findById(req.params.id);
 
         res.status(200).json({viewRecord});
     } catch (error) {

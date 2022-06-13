@@ -5,6 +5,7 @@ export const getStudent = async (req, res) => {
         const studentRecord = await StudentRecord.find();
         
         res.status(200).json({studentRecord});
+        
     } catch (error) {
         res.status(404).json({
             message : "Data not found"
