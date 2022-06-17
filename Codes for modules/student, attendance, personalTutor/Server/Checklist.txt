@@ -1,0 +1,5 @@
+Batch 2022
+Level: L4
+section: A
+Course: Bsc Software
+

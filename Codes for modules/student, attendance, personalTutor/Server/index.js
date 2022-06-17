@@ -3,6 +3,8 @@ import bodyParser from "body-parser";
 import cors from "cors";
 import db from './db/index.js';
 import studentRoutes from './routes/studentRoute.js';
+import attendanceRoutes from './routes/attendanceRoute.js';
+import attendanceStudentRoutes from './routes/attendanceStudentRoute.js';
 import personalTutorRoutes from './routes/personalTutorRoute.js';
 import personalTutorStudentRoutes from './routes/personalTutorStudentRoute.js';
 
@@ -14,6 +16,8 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(cors());
 
 app.use('/records', studentRoutes);
+app.use('/records', attendanceRoutes);
+app.use('/records', attendanceStudentRoutes);
 app.use('/records', personalTutorRoutes);
 app.use('/records', personalTutorStudentRoutes);
 
