@@ -51,7 +51,9 @@ const Dashboard = () => {
             </ListItem>
             <ListItem>
               <ListItemButton>
+              <Link to="/attendance" style={{ textDecoration: "none" }}>
                 <Typography color="white"> Attendance </Typography>
+              </Link>
               </ListItemButton>
             </ListItem>
             <ListItem>

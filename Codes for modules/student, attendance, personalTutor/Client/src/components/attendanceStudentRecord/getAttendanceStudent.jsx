@@ -5,24 +5,29 @@ import { Button, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-import PersonalTutorStudentRecord from "./personalTutorStudentRecord.jsx";
+import AttendanceStudentRecord from "./attendanceStudentRecord.jsx";
 
 import { Link } from "react-router-dom";
 
-const fetchPersonalTutorStudent = async (idPersonalTutor) => {
+const fetchAttendanceStudent = async (idAttendance, course, module, level, section, year) => {
   
-  const records = await axios.get(`http://localhost:5000/records/personalTutorStudents/${idPersonalTutor}`).then((res) => res.data);
+  const records = await axios.get(`http://localhost:5000/records/attendanceStudents/${idAttendance}/${course}/${module}/${level}/${section}/${year}`).then((res) => res.data);
   
   return records;
 };
 
-const GetPersonalTutorStudent = () => {
-  const idPersonalTutor = useParams().id;
-  const [personalTutorStudent, setPersonalTutorStudent] = useState();
+const GetAttendanceStudent = () => {
+  const idAttendance = useParams().id;
+  const course = useParams().course;
+  const module = useParams().module;
+  const level = useParams().level;
+  const section = useParams().section;
+  const year = useParams().year;
+  const [attendanceStudent, setAttendanceStudent] = useState();
   useEffect(() => {
-    fetchPersonalTutorStudent(idPersonalTutor).then((data) => setPersonalTutorStudent(data.personalTutorStudentRecord));
+    fetchAttendanceStudent(idAttendance, course, module, level, section, year).then((data) => setAttendanceStudent(data.attendanceStudentRecord));
   }, []);
-  console.log(personalTutorStudent);
+  // console.log(attendanceStudent);
   return (
     <>
       <div>
@@ -34,13 +39,13 @@ const GetPersonalTutorStudent = () => {
             textShadow: "1px 2px grey",
           }}
         >
-          Students Linked With Personal Tutor
+          Students Linked With Attendance
         </Typography>
         <div className="buttons">
           <Grid container spacing={2}>
 
             <Grid item xs={4}>
-              <Link to={`/personalTutorStudent/create/${idPersonalTutor}`} style={{ textDecoration: "none" }}>
+              {/* <Link to={`/attendanceStudent/create/${idAttendance}`} style={{ textDecoration: "none" }}>
                 <Button sx={{marginTop : "19px"}}
                   variant="contained"
                   color="secondary"
@@ -48,7 +53,7 @@ const GetPersonalTutorStudent = () => {
                 >
                   Create
                 </Button>
-              </Link>
+              </Link> */}
             </Grid>
 
             <Grid item xs={4}>
@@ -58,7 +63,7 @@ const GetPersonalTutorStudent = () => {
             </Grid>
   
             <Grid item xs={4}>
-              <Link to={"/personalTutorStudent/search"} style={{ textDecoration: "none" }}>
+              <Link to={"/attendanceStudent/search"} style={{ textDecoration: "none" }}>
                 <Button sx={{marginTop : "19px"}}
                   variant="contained"
                   color="secondary"
@@ -73,11 +78,11 @@ const GetPersonalTutorStudent = () => {
         </div>
         <div className="containList">
         
-          {personalTutorStudent &&
-            personalTutorStudent.map((pTSRecord, i) => (
+          {attendanceStudent &&
+            attendanceStudent.map((pTSRecord, i) => (
               <div key={i}>
               
-                <PersonalTutorStudentRecord ps={pTSRecord} />
+                <AttendanceStudentRecord ps={pTSRecord} />
               </div>
             ))}
         </div>
@@ -86,4 +91,4 @@ const GetPersonalTutorStudent = () => {
   );
 };
 
-export default GetPersonalTutorStudent;
+export default GetAttendanceStudent;

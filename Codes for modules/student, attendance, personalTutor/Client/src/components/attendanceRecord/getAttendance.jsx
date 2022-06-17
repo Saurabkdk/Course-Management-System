@@ -1,28 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { Button, Grid, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 
-import PersonalTutorStudentRecord from "./personalTutorStudentRecord.jsx";
+import AttendanceRecord from "./attendanceRecord.jsx";
 
 import { Link } from "react-router-dom";
 
-const fetchPersonalTutorStudent = async (idPersonalTutor) => {
-  
-  const records = await axios.get(`http://localhost:5000/records/personalTutorStudents/${idPersonalTutor}`).then((res) => res.data);
-  
-  return records;
+const fetchAttendance = async () => {
+  return await axios.get("http://localhost:5000/records/attendance").then((res) => res.data);
 };
 
-const GetPersonalTutorStudent = () => {
-  const idPersonalTutor = useParams().id;
-  const [personalTutorStudent, setPersonalTutorStudent] = useState();
+const GetAttendance = () => {
+  const [attendance, setAttendance] = useState();
   useEffect(() => {
-    fetchPersonalTutorStudent(idPersonalTutor).then((data) => setPersonalTutorStudent(data.personalTutorStudentRecord));
+    fetchAttendance().then((data) => setAttendance(data.attendanceRecord));
   }, []);
-  console.log(personalTutorStudent);
+
   return (
     <>
       <div>
@@ -34,13 +29,13 @@ const GetPersonalTutorStudent = () => {
             textShadow: "1px 2px grey",
           }}
         >
-          Students Linked With Personal Tutor
+          Attendance
         </Typography>
         <div className="buttons">
           <Grid container spacing={2}>
 
             <Grid item xs={4}>
-              <Link to={`/personalTutorStudent/create/${idPersonalTutor}`} style={{ textDecoration: "none" }}>
+              <Link to={"/attendance/create"} style={{ textDecoration: "none" }}>
                 <Button sx={{marginTop : "19px"}}
                   variant="contained"
                   color="secondary"
@@ -58,7 +53,7 @@ const GetPersonalTutorStudent = () => {
             </Grid>
   
             <Grid item xs={4}>
-              <Link to={"/personalTutorStudent/search"} style={{ textDecoration: "none" }}>
+              <Link to={"/attendance/search"} style={{ textDecoration: "none" }}>
                 <Button sx={{marginTop : "19px"}}
                   variant="contained"
                   color="secondary"
@@ -72,12 +67,10 @@ const GetPersonalTutorStudent = () => {
           </Grid>
         </div>
         <div className="containList">
-        
-          {personalTutorStudent &&
-            personalTutorStudent.map((pTSRecord, i) => (
+          {attendance &&
+            attendance.map((attendancerecord, i) => (
               <div key={i}>
-              
-                <PersonalTutorStudentRecord ps={pTSRecord} />
+                <AttendanceRecord attendancerecord={attendancerecord} />
               </div>
             ))}
         </div>
@@ -86,4 +79,4 @@ const GetPersonalTutorStudent = () => {
   );
 };
 
-export default GetPersonalTutorStudent;
+export default GetAttendance;
