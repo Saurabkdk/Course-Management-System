@@ -1,337 +1,49 @@
-import {
-    FormControlLabel,
-    FormLabel,
-    TextField,
-    Typography,
-    RadioGroup,
-    Radio,
-    Button,
-  } from "@mui/material";
-  import { Box } from "@mui/system";
-  import axios from "axios";
-  import React, { useState } from "react";
-  import { useNavigate } from "react-router-dom";
-  
-  const CreateStaff = () => {
-    const redirect = useNavigate();
-    const [record, setRecord] = useState({
-      id: "",
-      firstname: "",
-      middlename: "",
-      surname: "",
-      address: "",
-      telephone: "",
-      email: "",
-      role: "",
-      subject: "",
-    });
-  
-    function handleChange(e) {
-      setRecord((previousRecord) => {
-        return {
-          ...previousRecord,
-          [e.target.name]: e.target.value,
-        };
-      });
-    }
-    const [status, setStatus] = useState();
-  
-    function handleStatus(event) {
-      setStatus(event.target.value);
-    }
-  
-    const [dormant, setDormant] = useState();
-  
-    function handleDormant(event) {
-      setDormant(event.target.value);
-    }
-  
-    const sendRecord = async () => {
-      await axios
-        .post("http://localhost:5000/records/staff", {
-          id: String(record.id),
-          status: String(status),
-          dormant: String(dormant),
-          firstname: String(record.firstname),
-          middlename: String(record.middlename),
-          surname: String(record.surname),
-          address: String(record.address),
-          telephone: String(record.telephone),
-          email: String(record.email),
-          role: String(record.role),
-          subject: String(record.subject),
-        })
-        .then((res) => res.data);
-    };
-  
-    const recordSubmit = (event) => {
-      event.preventDefault();
-      // console.log(record, status, dormant);
-      sendRecord().then(() => redirect("/staff"));
-    };
-  
-    return (
-      <>
-        <div>
-          <Typography
-            sx={{
-              paddingTop: "20px",
-              paddingLeft: "50px",
-              fontSize: "40px",
-              textShadow: "1px 2px grey",
-            }}
-          >
-            Staff
-          </Typography>
-          <form onSubmit={recordSubmit}>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                maxWidth: "40%",
-                padding: "40px 15% 50px",
-                textAlign: "left",
-              }}
-            >
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Id
-              </FormLabel>
-              <TextField
-                required
-                type="number"
-                value={record.id}
-                onChange={handleChange}
-                variant="outlined"
-                name="id"
-              ></TextField>
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Status
-              </FormLabel>
-              <RadioGroup name="status">
-                <FormControlLabel
-                  checked={status === "Provisional"}
-                  onChange={handleStatus}
-                  value="Provisional"
-                  control={<Radio required/>}
-                  label="Provisional"
-                />
-                <FormControlLabel
-                  checked={status === "Live"}
-                  onChange={handleStatus}
-                  value="Live"
-                  control={<Radio />}
-                  label="Live"
-                />
-                <FormControlLabel
-                  checked={status === "Dormant"}
-                  onChange={handleStatus}
-                  value="Dormant"
-                  control={<Radio />}
-                  label="Dormant"
-                />
-              </RadioGroup>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Reason for dormancy (If)
-              </FormLabel>
-              <RadioGroup name="dormant">
-                <FormControlLabel
-                  checked={dormant === "Graduated"}
-                  onChange={handleDormant}
-                  value="Graduated"
-                  control={<Radio required/>}
-                  label="Graduated"
-                />
-                <FormControlLabel
-                  checked={dormant === "Withdrawn"}
-                  onChange={handleDormant}
-                  value="Withdrawn"
-                  control={<Radio />}
-                  label="Withdrawn"
-                />
-                <FormControlLabel
-                  checked={dormant === "Terminated"}
-                  onChange={handleDormant}
-                  value="Terminated"
-                  control={<Radio />}
-                  label="Terminated"
-                />
-                <FormControlLabel
-                  checked={dormant === "None"}
-                  onChange={handleDormant}
-                  value="None"
-                  control={<Radio />}
-                  label="None"
-                />
-              </RadioGroup>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                First Name
-              </FormLabel>
-              <TextField
-                required
-                value={record.firstname}
-                onChange={handleChange}
-                variant="outlined"
-                name="firstname"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Middle Name
-              </FormLabel>
-              <TextField
-                required
-                value={record.middlename}
-                onChange={handleChange}
-                variant="outlined"
-                name="middlename"
-              ></TextField>
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Surname
-              </FormLabel>
-              <TextField
-                required
-                value={record.surname}
-                onChange={handleChange}
-                variant="outlined"
-                name="surname"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Address
-              </FormLabel>
-              <TextField
-                required
-                value={record.address}
-                onChange={handleChange}
-                variant="outlined"
-                name="address"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Telephone
-              </FormLabel>
-              <TextField
-                required
-                value={record.telephone}
-                onChange={handleChange}
-                variant="outlined"
-                name="telephone"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Email
-              </FormLabel>
-              <TextField
-                required
-                value={record.email}
-                onChange={handleChange}
-                variant="outlined"
-                name="email"
-                type="email"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Role(s)
-              </FormLabel>
-              <TextField
-                required
-                value={record.role}
-                onChange={handleChange}
-                variant="outlined"
-                name="role"
-              ></TextField>
-  
-              <FormLabel
-                sx={{
-                  fontSize: "20px",
-                  margin: "15px 0px 5px",
-                  fontWeight: "bold",
-                }}
-              >
-                Subject(s)
-              </FormLabel>
-              <TextField
-                required
-                value={record.subject}
-                onChange={handleChange}
-                variant="outlined"
-                name="subject"
-              ></TextField>
-  
-              <Button
-                variant="contained"
-                type="submit"
-                sx={{ marginTop: "50px" }}
-              >
-                Add Record
-              </Button>
-            </Box>
-          </form>
-        </div>
-      </>
-    );
-  };
-  
-  export default CreateStaff;
-  
+// import React from "react";
+// import {  } from "@mui/material";
+// import { Routes, Route } from 'react-router-dom';
+
+// import './App.css';
+
+// // import Login from "./components/login/login";
+// import { Staff, StaffCreate, StaffSearch, StaffUpdate, StaffView } from "./components/staffRecord/staff";
+// import Student from "./components/studentRecord/student";
+// import { Module, ModuleCreate, ModuleSearch, ModuleUpdate, ModuleView } from "./components/moduleRecord/module";
+// import { Assignment, AssignmentCreate, AssignmentSubmit, AssignmentUpdate, AssignmentView, Submitted, SubmittedMark, SubmittedSearch, SubmittedView } from "./components/assignmentRecord/assignment";
+
+// const App = () => {
+//   return(
+//     <>
+//     <Routes>
+//       {/* <Route exact path="/" element={<Login />}></Route> */}
+
+//       <Route exact path="/staff" element={<Staff />}></Route>
+//       <Route exact path="/staff/create" element={<StaffCreate />}></Route>
+//       <Route exact path="/staff/edit/:id" element={<StaffUpdate />}></Route>
+//       <Route exact path="/staff/view/:id" element={<StaffView />}></Route>
+//       <Route exact path="/staff/search" element={<StaffSearch />}></Route>
+
+//       <Route exact path="/student" element={<Student />}></Route>
+
+//       <Route exact path="/module" element={<Module />}></Route>
+//       <Route exact path="/module/create" element={<ModuleCreate />}></Route>
+//       <Route exact path="/module/edit/:id" element={<ModuleUpdate />}></Route>
+//       <Route exact path="/module/view/:id" element={<ModuleView />}></Route>
+//       <Route exact path="/module/search" element={<ModuleSearch />}></Route>
+
+//       <Route exact path="/assignment" element={<Assignment />}></Route>
+//       <Route exact path="/assignment/create" element={<AssignmentCreate />}></Route>
+//       <Route exact path="/assignment/edit/:id" element={<AssignmentUpdate />}></Route>
+//       <Route exact path="/assignment/view/:id" element={<AssignmentView />}></Route>
+
+//       <Route exact path="/submission" element={<AssignmentSubmit />}></Route>
+//       <Route exact path="/submitted" element={<Submitted />}></Route>
+//       <Route exact path="/submitted/mark/:id" element={<SubmittedMark />}></Route>
+//       <Route exact path="/submitted/view/:id" element={<SubmittedView />}></Route>
+//       <Route exact path="/submitted/search/:id" element={<SubmittedSearch />}></Route>
+
+//     </Routes>
+//     </>
+//   )
+// }
+
+// export default App;

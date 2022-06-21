@@ -1,32 +1,31 @@
+import React, { useState } from 'react';
 import { Box, Button, TextField, Typography, Grid, List, ListItem } from '@mui/material';
 import axios from 'axios';
-import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-
-const SearchStaff = () => {
-
+const SearchModule = () => {
     const [input, setInput] = useState({
-        id : "0",
+        id : "0"
     })
     const [record, setRecord] = useState()
 
-    const searchInput = (e) => {
+    const searchInput = (event) => {
         setInput((previousInput) => {
-            return{
+            return {
                 ...previousInput,
-                [e.target.name] : e.target.value
+                [event.target.name] : event.target.value
             }
         })
     }
-        const id = parseInt(input.id);
-    
-        const ViewSearch = async () => { 
-            await axios.get(`http://localhost:5000/records/staff/search/${id}`)
-            .then((res) => res.data)
-            .then((data) => setRecord(data.searchRecord)) 
-        }
+
+    const id = input.id;
+
+    const ViewSearch = async () => {
+        await axios.get(`http://localhost:5000/records/module/search/${id}`)
+        .then((res) => res.data)
+        .then((data) => setRecord(data.searchModule));
+    }
 
   return (
     <>
@@ -39,7 +38,7 @@ const SearchStaff = () => {
             textShadow: "1px 2px grey",
           }}
         >
-          Staff
+          Modules
         </Typography>
         <Box sx={{
             display : "flex",
@@ -66,10 +65,10 @@ const SearchStaff = () => {
                       <Button
                         color="inherit"
                         LinkComponent={Link}
-                        to={`/staff/view/${record._id}`}
+                        to={`/module/view/${record._id}`}
                       >
                         <Typography>
-                          {record.id}. {record.firstname} {record.middlename} {record.surname}
+                          {record.id}. {record.module_name}
                         </Typography>
                       </Button>
                     </p>
@@ -87,7 +86,7 @@ const SearchStaff = () => {
                         </Grid>
                         <Grid item xs={3}>
                           <Link
-                            to={`/staff/edit/${record._id}`}
+                            to={`/module/edit/${record._id}`}
                             style={{ textDecoration: "none", color: "inherit" }}
                           >
                             <Button
@@ -111,7 +110,7 @@ const SearchStaff = () => {
                           </Button>
                         </Grid>
                         <Grid item xs={3}>
-                          <Link to={`/staff/view/${record._id}`}>
+                          <Link to={`/module/view/${record._id}`}>
                             <Button aria-label="delete" sx={{ color: "black" }}>
                               {" "}
                               <DeleteIcon />{" "}
@@ -132,4 +131,4 @@ const SearchStaff = () => {
   )
 }
 
-export default SearchStaff;
+export default SearchModule;

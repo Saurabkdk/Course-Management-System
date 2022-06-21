@@ -323,6 +323,7 @@ const UpdateStaff = () => {
 
               <TextField
                 required
+                multiline
                 value={array.role}
                 onChange={handleArray}
                 variant="outlined"
@@ -341,6 +342,7 @@ const UpdateStaff = () => {
 
               <TextField
                 required
+                multiline
                 value={array.subject}
                 onChange={handleArray}
                 variant="outlined"

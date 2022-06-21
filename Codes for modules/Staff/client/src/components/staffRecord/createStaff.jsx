@@ -242,7 +242,6 @@ const CreateStaff = () => {
               Middle Name
             </FormLabel>
             <TextField
-              required
               value={record.middlename}
               onChange={handleChange}
               variant="outlined"
@@ -328,6 +327,7 @@ const CreateStaff = () => {
             </FormLabel>
             <TextField
               required
+              multiline
               value={array.role}
               onChange={handleArray}
               variant="outlined"
@@ -345,6 +345,7 @@ const CreateStaff = () => {
             </FormLabel>
             <TextField
               required
+              multiline
               value={array.subject}
               onChange={handleArray}
               variant="outlined"
