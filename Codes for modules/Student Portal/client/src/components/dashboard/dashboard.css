@@ -1,0 +1,15 @@
+.dashboard{
+    background-image: linear-gradient(#0068FF, #0068FF);
+}
+.heading{
+    padding: 15px 30px 15px;
+}
+#list{
+    padding-top: 5px;
+    padding-left: 20px;
+    font-size: 14px;
+}
+.hover{
+    
+    font-weight: bold;
+}

@@ -1,0 +1,42 @@
+.background{
+    background-image: url(backgroundRMS.png);
+    background-size: cover;
+    height: 94vh;
+    padding-top: 6vh;
+}
+#image{
+    width: 400px;
+    height: 300px;
+    margin: 3% 18%;
+}
+img{
+    width: 400px;
+    height: 300px;
+}
+.login{
+    height: 80%;
+    width: 40%;
+    margin : 0px 0% 0px 51.5%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3%;
+    box-shadow: 5px 5px #B7BBC6;
+    background-color: #FF9400; 
+    /* FFA351 */
+    border: 2px solid gray;
+    border-radius: 10%;
+}
+.input{
+    height: 30px;
+    margin: 3%;
+    width: 100%;
+    border: 2px solid black;
+    border-radius: 5px;
+    opacity: 0.5;
+    background-color: white;
+}
+/* input[type=number]:focus, input[type=password]:focus{
+    background-color: #37AEFF;
+    opacity : 0.6;
+} */
